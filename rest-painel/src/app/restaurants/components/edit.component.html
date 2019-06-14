@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col s12">
+    <h4><i class="material-icons">keyboard_arrow_right</i>Restaurante <small class="grey-text">atualize os dados do restaurante</small></h4>
+  </div>
+
+  <div class="col s9">
+    <form class="row" (submit)="save($event)">
+      <div class="input-field col s12">
+        <input id="name" name="name" type="text" placeholder="Nome" [(ngModel)]="restaurant.name">
+        <label for="name">Nome do restaurante</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="description" name="description" class="materialize-textarea" placeholder="Descrição" [(ngModel)]="restaurant.description"></textarea>
+        <label for="description">Descrição do restaurante</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="phone" type="text" name="phone" [(ngModel)]="restaurant.phone" placeholder="Telefone">
+        <label for="phone">Telefone</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="cep" type="text" name="cep" [(ngModel)]="address.cep" (keyup)="searchCep()" placeholder="CEP">
+        <label for="cep">CEP</label>
+      </div>
+
+      <div class="input-field col s9">
+        <input id="address" type="text" name="address" [(ngModel)]="address.address" placeholder="Endereço">
+        <label for="address">Endereço</label>
+      </div>
+
+      <div class="input-field col s3">
+        <input id="number" type="text" name="number" [(ngModel)]="address.number" placeholder="Número">
+        <label for="number">Número</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="city" type="text" name="city" [(ngModel)]="address.city" placeholder="Cidade">
+        <label for="city">Cidade</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="neighborhood" type="text" name="neighborhood" [(ngModel)]="address.neighborhood" placeholder="Bairro">
+        <label for="neighborhood">Bairro</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="state" type="text" name="state" [(ngModel)]="address.state" placeholder="Estado">
+        <label for="state">Estado</label>
+      </div>
+
+      <div class="input-field col s12">
+        <input id="complement" type="text" name="complement" [(ngModel)]="address.complement" placeholder="Complemento">
+        <label for="complement">Complemento</label>
+      </div>
+
+      <div class="input-field col s12">
+        <input type="submit" value="Salvar" class="btn">
+      </div>
+    </form>
+  </div>
+
+
+    <div class="col s3">
+      <div class="card white-text center-align photo-changer">
+        <div class="card-image">
+          <img class="materialboxed responsive-img" src="{{restaurant.photo_full_url}}">
+        </div>
+        <div class="card-content"
+             [ngClass]="{
+                'lighten-1': dragging,
+                'grey': upload_status === 'not',
+                'amber': upload_status === 'sending',
+                'green': upload_status === 'success',
+                'red': upload_status === 'error'
+            }"
+             (click)="file.click()"
+             (drop)="upload($event)"
+             (dragover)="dragover($event)"
+             (dragleave)="dragging = false"
+        >
+          <p *ngIf="!dragging;else release">Arraste sua foto aqui ou clique para enviar</p>
+          <ng-template #release>
+            <p *ngIf="upload_status === 'not'">Solte para enviar</p>
+            <p *ngIf="upload_status === 'sending'">Enviando, aguarde...</p>
+            <p *ngIf="upload_status === 'success'">Enviado com sucesso, você pode arrastar ou clicar aqui para enviar outro</p>
+            <p *ngIf="upload_status === 'error'">Erro ao enviar, tente novamente ou contate o administrador do sistema.</p>
+          </ng-template>
+          <input type="file" accept="image/*" #file style="display: none" (change)="upload($event)">
+        </div>
+      </div>
+    </div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row">
+          <div class="col s12 margin-bottom">
+            <span class="card-title">Fotos do restaurante</span>
+          </div>
+
+          <div class="col s3 m3" *ngFor="let photo of photos">
+
+            <div class="card">
+              <div class="card-image ">
+                <img class="materialboxed responsive-img card-image"  src="{{photo.full_url}}">
+                <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="deletePhoto(photo)"><i class="material-icons">clear</i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-action">
+          <div class="row">
+            <div class="file-field input-field col s9">
+              <div class="btn">
+                <span>Carregar imagem...</span>
+                <input type="file" (change)="preparePhoto($event)">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+            <div class="input-field col s3 right-align">
+              <input type="submit" value="Enviar" class="btn" (click)="sendPhoto()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

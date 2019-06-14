@@ -1,0 +1,51 @@
+<ul id="slide-out" class="side-nav">
+    <li *ngIf="me !== null">
+      <div class="user-view">
+      <div class="background lime">
+
+      </div>
+      <a><img class="circle" src="http://1.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60"></a>
+      <a><span class="white-text name">John Doe</span></a>
+      <a><span class="white-text email">jdandturk@gmail.com</span></a>
+      </div>
+    </li>
+
+    <li ><div class="divider"></div></li>
+    <li *ngIf="me === null"><a  [routerLink]="['/login']">Acessar</a></li>
+    <li *ngIf="me === null"><a  [routerLink]="['/resgister']">Registrar-se</a></li>
+    <li *ngIf="me !== null" [routerLinkActive]="[active]"><a  class="subheader">Minha conta</a></li>
+    <li *ngIf="me !== null" [routerLinkActive]="[active]"><a [routerLink]="['/profile']"><i class="material-icons">account_circle</i>Editar meus dados</a></li>
+    <li *ngIf="me !== null"><a [routerLink]="['/password']"><i class="material-icons">security</i>Trocar senha</a></li>
+    <li *ngIf="me !== null"><a [routerLink]="['/logout']"><i class="material-icons">cancel</i>sair</a></li>
+  </ul>
+
+<header>
+  <nav>
+    <div class="nav-wrapper amber">
+      <div class="row">
+        <div class="col s12">
+          <a [routerLink]="['/']" class="brand-logo">Guia de Resturantes</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a  data-activates="slide-out" id="showMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+
+</main>
+
+<footer class="page-footer amber">
+    <div class="container">
+
+    </div>
+    <div class="footer-copyright ">
+      <div class="container">
+      © 2018 Copyright Text
+      </div>
+    </div>
+  </footer>

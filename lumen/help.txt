@@ -1,0 +1,30 @@
+ php -S localhost:8000 -t ./public
+
+#criar migration
+    php artisan make:migration create_users_table
+#criar migrantion sgbd
+    php artisan migrate
+#criar seeds
+    php artisan make:seeder UsersTableSeeder
+    php artisan db:seed
+
+
+php artisan passport:install
+Encryption keys generated successfully.
+Personal access client created successfully.
+Client ID: 1
+Client Secret: F5EI0g8fgjHvhILfBuN33jwnHSdKjDNMppfbC6eR
+Password grant client created successfully.
+Client ID: 2
+Client Secret: ft9ZEJsyUfAMU3SmOg37KUbNA70El6ORX7UCCHN8
+Client ID: 3
+Client Secret: iioiBTB9HOpVvW0lo51bdtJ4jnWKDxXft4usSgXU
+
+
+Access Key ID:
+AKIAJZP3KN4ZAYHCJZRQ
+Secret Access Key:
+dMFvnR8cAdME20nkQdGRv9qwhMj9THxV3bxOKkmX
+
+
+https://github.com/laravelbrasil/forum/issues/111
